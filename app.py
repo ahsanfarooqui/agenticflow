@@ -123,7 +123,7 @@ if st.button("Run Agent"):
 
         # Display response
         st.subheader("🔹 AI Response:")
-        st.markdown(response)
+        st.markdown(response['output'])
 
         # Display verbose logs
         st.subheader("📜 Agent Reasoning & Logs:")
