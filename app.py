@@ -85,7 +85,8 @@ agent = initialize_agent(
 
 
 # STREAMLIT UI
-st.title("🔹 AI Assistant (GPT-4o)")
+st.title("🔹 AI Agent")
+st.header("Ask about weather, stock prices or general queries.")
 
 # User Input Box
 user_input = st.text_area("💬 Ask me anything:", height=100)
