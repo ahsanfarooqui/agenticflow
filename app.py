@@ -69,10 +69,16 @@ def web_search(query, max_results=5):
         return f"❌ Error in web search: {str(e)}"
 
 
+def default_query(query):
+    """This tool is called if no other tool seems suitable for the job"""
+    return "The query is not very clear, ask the user to further elaborate or use default language model to answer"
+
+
 # Create LangChain Tools
 weather_tool = Tool(name="Weather Tool", func=get_weather, description="Fetches current weather for any city.")
 stock_tool = Tool(name="Stock Price Tool", func=get_stock_price, description="Fetches the latest stock price for any NYSE-listed company.")
 web_tool = Tool(name="Web Search Tool", func=web_search, description="Performs a web search using DuckDuckGo.")
+default_tool = Tool(name="Default Tool", func=default_query, description="This tool is used when no other tool seems feasible")
 
 # Initialize LangChain Agent with GPT-4o
 llm = ChatOpenAI(model="gpt-4o", openai_api_key=OPENAI_API_KEY)
