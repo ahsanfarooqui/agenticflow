@@ -115,7 +115,7 @@ if st.button("Run Agent"):
         system_message = f"""You are a helpful assistant. Today's date is {datetime.datetime.date(datetime.datetime.now())}. Use only when needed especially when doing web search.
         If you don't understand the query or you think it is unclear like Test etc, please ask user to further elaborate before answering."""
         messages = {"messages":[HumanMessage(content=system_message + " " + user_input)]} 
-        response = agent.invoke(messages)
+        response = agent.invoke([HumanMessage(content=system_message + " " + user_input)])
 
         # Get verbose logs
         verbose_output = mystdout.getvalue()
