@@ -5,3 +5,4 @@ yfinance
 langchain
 langchain-openai
 duckduckgo-search
+datetime
