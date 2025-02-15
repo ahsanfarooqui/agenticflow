@@ -4,9 +4,11 @@ import requests
 import yfinance as yf
 from langchain.tools import Tool
 from langchain_openai import ChatOpenAI
-from langchain.agents import initialize_agent, AgentType
+from langchain.agents import initialize_agent, AgentType, AgentExecutor, create_tool_calling_agent
 from duckduckgo_search import DDGS
 import datetime
+from langchain_core.messages import HumanMessage
+
 
 # Fetch API keys from Streamlit secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
@@ -112,7 +114,8 @@ if st.button("Run Agent"):
         # response = agent.run(user_input)
         system_message = f"""You are a helpful assistant. Today's date is {datetime.datetime.date(datetime.datetime.now())}. Use only when needed especially when doing web search.
         If you don't understand the query or you think it is unclear like Test etc, please ask user to further elaborate before answering."""
-        response = agent.run(f" {system_message} Here's the user's query.: {user_input}")
+        messages = {"messages":[HumanMessage(content=system_message + " " + user_input)]} 
+        response = agent.invoke(messages)
 
         # Get verbose logs
         verbose_output = mystdout.getvalue()
