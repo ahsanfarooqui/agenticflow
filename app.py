@@ -6,6 +6,7 @@ from langchain.tools import Tool
 from langchain_openai import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
 from duckduckgo_search import DDGS
+import datetime
 
 # Fetch API keys from Streamlit secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
@@ -102,7 +103,8 @@ if st.button("Run Agent"):
         sys.stdout = mystdout = StringIO()
 
         # Run the agent
-        response = agent.run(user_input)
+        # response = agent.run(user_input)
+        response = agent.run(f"today's date is {datetime.datetime.date(datetime.datetime.now())}. Use only when needed especially when doing web search. here's the prompt: {user_input}")
 
         # Get verbose logs
         verbose_output = mystdout.getvalue()
