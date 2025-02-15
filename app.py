@@ -84,7 +84,7 @@ default_tool = Tool(name="Default Tool", func=default_query, description="This t
 llm = ChatOpenAI(model="gpt-4o", openai_api_key=OPENAI_API_KEY)
 
 agent = initialize_agent(
-    tools=[weather_tool, stock_tool, web_tool],
+    tools=[weather_tool, stock_tool, web_tool,default_tool],
     llm=llm,
     agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
     verbose=True
@@ -110,7 +110,9 @@ if st.button("Run Agent"):
 
         # Run the agent
         # response = agent.run(user_input)
-        response = agent.run(f"today's date is {datetime.datetime.date(datetime.datetime.now())}. Use only when needed especially when doing web search. here's the prompt: {user_input}")
+        system_message = f"""You are a helpful assistant. Today's date is {datetime.datetime.date(datetime.datetime.now())}. Use only when needed especially when doing web search.
+        If you don't understand the query or you think it is unclear like Test etc, please ask user to further elaborate before answering."""
+        response = agent.run(f" Here's the user's query.: {user_input}")
 
         # Get verbose logs
         verbose_output = mystdout.getvalue()
