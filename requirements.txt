@@ -1,0 +1,7 @@
+streamlit
+openai
+requests
+yfinance
+langchain
+langchain-openai
+duckduckgo-search
