@@ -89,7 +89,8 @@ agent = initialize_agent(
     tools=[weather_tool, stock_tool, web_tool,default_tool],
     llm=llm,
     agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
+    verbose=True,
+    handle_parsing_errors = True
 )
 
 
